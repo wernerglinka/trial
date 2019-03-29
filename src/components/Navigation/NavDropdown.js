@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-import menuItems from "../navigation";
+import menuItems from "./navigation";
 
 function NavDropdown() {
   const [isOpen, setOpen] = useState(false);

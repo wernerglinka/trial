@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 
 import Header from "./components/TopMessage/TopMessage";
-import Navigation from "./components/Navigation/NavDropdown";
+import Navigation from "./components/Navigation/Navigation";
 import Pages from "./Pages/Router/Router";
 
 const App = () => (

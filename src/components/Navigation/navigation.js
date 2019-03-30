@@ -1,24 +1,30 @@
-const menuItems = [
-  {
-    name: "Link 1",
-    url: "/"
-  },
-  {
-    name: "Link 2",
-    url: "/"
-  },
-  {
-    name: "Link 3 and many more... Sollicitudin Sit Adipiscing",
-    url: "/"
-  },
-  {
-    name: "Link 4",
-    url: "/"
-  },
-  {
-    name: "Link 5",
-    url: "/"
-  }
-];
+import React, { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
 
-export default menuItems;
+import MainLogo from "./MainLogo/MainLogo";
+
+function Navigation() {
+  return (
+    <LogoWrapper width="200">
+      <MainLogo />
+    </LogoWrapper>
+  );
+}
+
+const LogoWrapper = styled("div")`
+  width: ${props => props.width}px;
+
+  .bracket {
+    fill: red;
+  }
+
+  .logoText {
+    fill: #333;
+  }
+
+  .subText {
+    fill: #999;
+  }
+`;
+
+export default Navigation;

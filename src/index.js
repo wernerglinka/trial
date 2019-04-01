@@ -3,14 +3,14 @@ import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 
-import Header from "./components/TopMessage/TopMessage";
 import Navigation from "./components/Navigation/Navigation";
 import Pages from "./Pages/Router/Router";
+
+import "./index.css";
 
 const App = () => (
   <BrowserRouter>
     <div>
-      <Header />
       <Navigation />
       <Pages />
     </div>

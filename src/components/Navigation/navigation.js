@@ -1,30 +1,28 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 
-import MainLogo from "./MainLogo/MainLogo";
+import Brand from "./MainLogo/Brand";
+import Menu from "./Menu";
+
+const NavWrapper = styled("div")`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+
+  background-color: #f8f8f8;
+`;
 
 function Navigation() {
   return (
-    <LogoWrapper width="200">
-      <MainLogo />
-    </LogoWrapper>
+    <NavWrapper>
+      <Brand width={200} />
+      <Menu />
+    </NavWrapper>
   );
 }
-
-const LogoWrapper = styled("div")`
-  width: ${props => props.width}px;
-
-  .bracket {
-    fill: red;
-  }
-
-  .logoText {
-    fill: #333;
-  }
-
-  .subText {
-    fill: #999;
-  }
-`;
 
 export default Navigation;

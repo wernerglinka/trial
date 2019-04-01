@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-import menuItems from "./navData";
-
-function NavDropdown() {
+function NavDropdown({ menu: menuData, menuName }) {
   const [isOpen, setOpen] = useState(false);
-  const [isHover, setHover] = useState(false);
 
   const navItemRef = useRef();
   const navListContainerRef = useRef();
@@ -23,7 +22,7 @@ function NavDropdown() {
   // when clicked and the dropdown is shown, the dropdown will be hidden
   // until another hover or click
   useEffect(() => {
-    if ((isOpen || isHover) && navListContainerRef.current.clientHeight === 0) {
+    if (isOpen && navListContainerRef.current.clientHeight === 0) {
       navListContainerRef.current.style.height = `${
         navListRef.current.clientHeight
       }px`;
@@ -37,27 +36,27 @@ function NavDropdown() {
     return () => {
       document.removeEventListener("mousedown", handleClick);
     };
-  }, [isOpen, isHover]);
+  }, [isOpen]);
 
   const updateOpen = () => setOpen(!isOpen);
-  const updateHover = () => setHover(!isHover);
 
   return (
     <>
-      <NavItem
-        ref={navItemRef}
-        onMouseEnter={updateHover}
-        onMouseLeave={updateHover}
-      >
-        <NavItemHeader onClick={updateOpen}>Nav Item Header</NavItemHeader>
+      <NavItem ref={navItemRef}>
+        <NavItemHeader onClick={updateOpen}>
+          {menuName}
+          {isOpen ? <FiChevronUp /> : <FiChevronDown />}
+        </NavItemHeader>
         <NavListContainer
           className={isOpen ? "isOpen" : null}
           ref={navListContainerRef}
         >
           <NavList ref={navListRef}>
-            {menuItems.map(item => (
+            {menuData.map(item => (
               <li key={item.name}>
-                <a href={item.url}>{item.name}</a>
+                <Link to={item.url} onClick={updateOpen}>
+                  {item.name}
+                </Link>
               </li>
             ))}
           </NavList>
@@ -67,20 +66,13 @@ function NavDropdown() {
   );
 }
 
-const TestContainer = styled("div")`
-  padding: 50px;
-`;
-
 const NavItem = styled("div")`
   position: relative;
-  display: inline-block;
-  background-color: #f5f5f5;
 `;
 
-const NavItemHeader = styled("div")`
-  padding: 10px 20px;
-  background-color: #f0f0f0;
-`;
+function NavItemHeader(props) {
+  return <div {...props} />;
+}
 
 const NavListContainer = styled("div")`
   position: absolute;
@@ -96,17 +88,10 @@ const NavListContainer = styled("div")`
 const NavList = styled("ul")`
   list-style: none;
   margin: 0;
-  padding: 10px 0;
-  background-color: #f5f5f5;
 
   a {
     display: block;
     text-decoration: none;
-    padding: 5px 20px;
-
-    &:hover {
-      background-color: #f0f0f0;
-    }
   }
 `;
 

@@ -41,6 +41,10 @@ function Router() {
 }
 
 const Wrapper = styled.div`
+  max-width: ${props => props.theme.contentWidth};
+  margin: 0 auto;
+  padding: 0 30px;
+
   .transition-group {
     position: relative;
   }

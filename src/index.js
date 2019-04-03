@@ -1,10 +1,13 @@
 import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import * as serviceWorker from "./serviceWorker";
 
 import Navigation from "./components/Navigation/Navigation";
 import Pages from "./Pages/Router/Router";
+
+import theme from "./theme";
 
 import "./index.css";
 
@@ -12,7 +15,9 @@ const App = () => (
   <BrowserRouter>
     <div>
       <Navigation />
-      <Pages />
+      <ThemeProvider theme={theme}>
+        <Pages />
+      </ThemeProvider>
     </div>
   </BrowserRouter>
 );

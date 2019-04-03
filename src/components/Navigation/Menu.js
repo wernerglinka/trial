@@ -1,39 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 
 import menuData from "./menuData";
-import NavDropdown from "./NavDropdown";
+import Dropdown from "./NavDropdown";
 
-const MenuWrapper = styled("ul")`
-  list-style: none;
+function MenuWrapper(props) {
+  return <ul {...props} />;
+}
 
-  > li {
-    display: inline-block;
-    cursor: pointer;
-    border: 1px solid #fff;
-
-    ul {
-      background-color: #ccc;
-    }
-  }
-`;
+function MenuItem(props) {
+  return <li {...props} />;
+}
 
 function Menu() {
   return (
-    <MenuWrapper>
+    <MenuWrapper className="menu">
       {menuData.map(topLevelItem => {
         return (
-          <li key={topLevelItem.name}>
+          <MenuItem key={topLevelItem.name} className="menuItem">
             {typeof topLevelItem.menu !== "object" ? (
               <Link to={topLevelItem.url}>{topLevelItem.name}</Link>
             ) : (
-              <NavDropdown
+              <Dropdown
                 menu={topLevelItem.menu}
                 menuName={topLevelItem.menuName}
               />
             )}
-          </li>
+          </MenuItem>
         );
       })}
     </MenuWrapper>

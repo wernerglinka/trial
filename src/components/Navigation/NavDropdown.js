@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
@@ -17,10 +18,6 @@ function NavDropdown({ menu: menuData, menuName }) {
     }
   };
 
-  // desired behavior:
-  // show dropdown on hover and permanently when clicked
-  // when clicked and the dropdown is shown, the dropdown will be hidden
-  // until another hover or click
   useEffect(() => {
     if (isOpen && navListContainerRef.current.clientHeight === 0) {
       navListContainerRef.current.style.height = `${
@@ -51,7 +48,7 @@ function NavDropdown({ menu: menuData, menuName }) {
           className={isOpen ? "isOpen" : null}
           ref={navListContainerRef}
         >
-          <NavList ref={navListRef}>
+          <NavList ref={navListRef} className="subMenu">
             {menuData.map(item => (
               <li key={item.name}>
                 <Link to={item.url} onClick={updateOpen}>
@@ -66,26 +63,31 @@ function NavDropdown({ menu: menuData, menuName }) {
   );
 }
 
-const NavItem = styled("div")`
+NavDropdown.propTypes = {
+  menu: PropTypes.array.isRequired, //eslint-disable-line
+  menuName: PropTypes.string.isRequired
+};
+
+const NavItem = styled.div`
   position: relative;
 `;
 
 function NavItemHeader(props) {
-  return <div {...props} />;
+  return <span {...props} />;
 }
 
-const NavListContainer = styled("div")`
+const NavListContainer = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
   z-index: 1;
   transition: height 0.5s ease;
   height: 0;
-  width: 300px; /* set this to accommodate longest link text */
+  width: 200px; /* set this to accommodate longest link text */
   overflow: hidden;
 `;
 
-const NavList = styled("ul")`
+const NavList = styled.ul`
   list-style: none;
   margin: 0;
 

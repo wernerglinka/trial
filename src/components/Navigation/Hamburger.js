@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Button = styled.button`
@@ -11,12 +12,6 @@ const Button = styled.button`
   cursor: pointer;
   background: none;
   border: none;
-  margin-top: 22px;
-  display: none;
-
-  @media (max-width: ${props => props.theme.activateHamburger}) {
-    display: block;
-  }
 
   &:focus {
     outline: 0;
@@ -73,16 +68,12 @@ const Button = styled.button`
   }
 `;
 
-function Hamburger() {
-  const [open, toggleOpen] = useState(false);
-
-  const toggleButton = () => toggleOpen(!open);
-
+function Hamburger({ open, toggleOpen }) {
   return (
     <Button
       type="button"
-      onClick={toggleButton}
-      className={`hamburger ${open ? "open" : null}`}
+      onClick={() => toggleOpen(!open)}
+      className={`hamburger ${open ? "open" : ""}`}
       aria-pressed="false"
     >
       <span />
@@ -91,5 +82,10 @@ function Hamburger() {
     </Button>
   );
 }
+
+Hamburger.propTypes = {
+  open: PropTypes.bool.isRequired,
+  toggleOpen: PropTypes.func.isRequired
+};
 
 export default Hamburger;

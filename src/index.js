@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import * as serviceWorker from "./serviceWorker";
 
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./components/Navigation/NavBar";
 import Pages from "./Pages/Router/Router";
 
 import theme from "./theme";

@@ -14,7 +14,7 @@ const LogoWrapper = styled("div")`
 `;
 
 const MainLogo = ({ width }) => (
-  <LogoWrapper width={width}>
+  <LogoWrapper className="mainLogo" width={width}>
     <svg version="1.1" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
       <g
         className="main-logo-container"

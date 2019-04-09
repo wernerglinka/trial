@@ -28,6 +28,7 @@ function NavDropdown({ menu: menuData, menuName }) {
       navListContainerRef.current.style.height = 0;
     }
 
+    // add click handler to document so we can close dropdown when clicked outside
     document.addEventListener("mousedown", handleClick);
     // return function to be called when unmounted
     return () => {
@@ -35,12 +36,10 @@ function NavDropdown({ menu: menuData, menuName }) {
     };
   }, [isOpen]);
 
-  const updateOpen = () => setOpen(!isOpen);
-
   return (
     <>
       <NavItem ref={navItemRef}>
-        <NavItemHeader onClick={updateOpen}>
+        <NavItemHeader onClick={() => setOpen(!isOpen)}>
           {menuName}
           {isOpen ? <FiChevronUp /> : <FiChevronDown />}
         </NavItemHeader>
@@ -51,7 +50,7 @@ function NavDropdown({ menu: menuData, menuName }) {
           <NavList ref={navListRef} className="subMenu">
             {menuData.map(item => (
               <li key={item.name}>
-                <Link to={item.url} onClick={updateOpen}>
+                <Link to={item.url} onClick={() => setOpen(!isOpen)}>
                   {item.name}
                 </Link>
               </li>

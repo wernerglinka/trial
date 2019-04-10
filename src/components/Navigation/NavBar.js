@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "@emotion/styled";
+import { ThemeProvider } from "emotion-theming";
 import useWindowWidth from "./useWindowWidth";
 
 import Brand from "./MainLogo/Brand";
